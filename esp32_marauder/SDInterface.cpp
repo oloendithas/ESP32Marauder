@@ -21,7 +21,7 @@ bool SDInterface::initSD() {
     pinMode(SD_CS, OUTPUT);
 
     delay(10);
-    #if (defined(MARAUDER_M5STICKC)) || (defined(HAS_CYD_TOUCH))
+    #if (defined(MARAUDER_M5STICKC)) || (defined(HAS_CYD_TOUCH) || (defined(MARAUDER_FLIPPER))
       /* Set up SPI SD Card using external pin header
       StickCPlus Header - SPI SD Card Reader
                   3v3   -   3v3
@@ -36,7 +36,8 @@ bool SDInterface::initSD() {
       #elif defined(HAS_CYD_TOUCH)
         enum { SPI_SCK = SD_SCK, SPI_MISO = SD_MISO, SPI_MOSI = SD_MOSI };
       #else
-        enum { SPI_SCK = 1, SPI_MISO = 2, SPI_MOSI = 3 };
+       Serial.println(I("Trying SD Card for others"));
+       enum { SPI_SCK = 1, SPI_MISO = 2, SPI_MOSI = 3 };
       #endif
       this->spiExt = new SPIClass();
       this->spiExt->begin(SPI_SCK, SPI_MISO, SPI_MOSI, SD_CS);
