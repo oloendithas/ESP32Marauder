@@ -36,7 +36,7 @@ bool SDInterface::initSD() {
       #elif defined(HAS_CYD_TOUCH)
         enum { SPI_SCK = SD_SCK, SPI_MISO = SD_MISO, SPI_MOSI = SD_MOSI };
       #else
-        enum { SPI_SCK = 0, SPI_MISO = 36, SPI_MOSI = 26 };
+        enum { SPI_SCK = 1, SPI_MISO = 2, SPI_MOSI = 3 };
       #endif
       this->spiExt = new SPIClass();
       this->spiExt->begin(SPI_SCK, SPI_MISO, SPI_MOSI, SD_CS);
